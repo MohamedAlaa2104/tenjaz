@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -23,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
-        'type',
+        'subscription_type_id',
         'is_active',
     ];
 
@@ -48,5 +49,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(SubscriptionType::class);
     }
 }
