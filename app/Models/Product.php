@@ -12,7 +12,6 @@ class Product extends Model
 
 
     protected $fillable = [
-        'subscription_type_id',
         'name',
         'description',
         'image',
@@ -21,8 +20,4 @@ class Product extends Model
         'is_active',
     ];
 
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(SubscriptionType::class);
-    }
 }

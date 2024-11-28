@@ -19,11 +19,17 @@ class DatabaseSeeder extends Seeder
     {
 
         $types = new Collection(['normal', 'gold', 'silver']);
+        $discountPercentage = 0;
 
-        $types->each(function ($type) {
+        $types->each(function ($type) use (&$discountPercentage) {
             $typeRecord = SubscriptionType::create(
-                ['name' => $type],
+                [
+                    'name' => $type,
+                    'discount_percentage' => $discountPercentage,
+                ],
             );
+
+            $discountPercentage += 10;
 
             User::factory()->create([
                 'name' => "{$type} user",

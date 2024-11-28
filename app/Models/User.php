@@ -29,6 +29,10 @@ class User extends Authenticatable
         'is_active',
     ];
 
+    protected $attributes = [
+        'subscription_type_id' => 1,
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,7 +45,7 @@ class User extends Authenticatable
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(SubscriptionType::class);
+        return $this->belongsTo(SubscriptionType::class, 'subscription_type_id');
     }
 
     /**

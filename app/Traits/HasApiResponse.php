@@ -2,12 +2,14 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 trait HasApiResponse
 {
 
-    public function successResponse(array $data, int $code = 200): JsonResponse
+    public function successResponse(array|Collection|AnonymousResourceCollection $data, int $code = 200): JsonResponse
     {
         return response()->json([
             'success'   => true,

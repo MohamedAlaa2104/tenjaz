@@ -14,11 +14,6 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'subscription_type_id' => fake()->randomElement(
-                SubscriptionType::all()
-                    ->pluck('id')
-                    ->toArray()
-            ),
             'name' => fake()->name(),
             'description' => fake()->text(),
             'image' => fake()->imageUrl(),

@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(SubscriptionType::class)->constrained();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
