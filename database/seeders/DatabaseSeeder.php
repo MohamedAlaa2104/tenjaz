@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $types = new Collection(['normal', 'gold', 'silver']);
+        $types = new Collection(['normal', 'silver', 'gold']);
         $discountPercentage = 0;
 
         $types->each(function ($type) use (&$discountPercentage) {
