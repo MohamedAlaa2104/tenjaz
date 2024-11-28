@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Product\ProductStoreRequest;
 use App\Http\Requests\Api\V1\Product\ProductUpdateRequest;
 use App\Http\Resources\V1\ProductResource;
+use App\Models\Product;
 use App\Models\User;
 use App\Repositories\ProductRepository;
 use App\Traits\HasApiResponse;
@@ -75,7 +76,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, string $id)
     {
-        $product = $this->productRepository->update(
+        $this->productRepository->update(
             attributes: $request->validated(),
             id: $id
         );

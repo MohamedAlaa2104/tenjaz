@@ -2,14 +2,13 @@
 
 namespace App\Http\Requests\Api\V1\Product;
 
-use App\Traits\HasApiResponse;
-use Illuminate\Contracts\Validation\Validator;
+use App\Traits\HasApiFailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ProductStoreRequest extends FormRequest
 {
-    use HasApiResponse;
+    use HasApiFailedValidation;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -35,16 +34,4 @@ class ProductStoreRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(
-            $this->errorResponse(
-                errors: [
-                    'message' => 'Validation errors occurred',
-                    'errors' => $validator->errors(),
-                ],
-                code: 422
-            )
-        );
-    }
 }

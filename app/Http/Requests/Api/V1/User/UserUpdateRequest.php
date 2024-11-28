@@ -2,15 +2,13 @@
 
 namespace App\Http\Requests\Api\V1\User;
 
-use App\Traits\HasApiResponse;
-use Illuminate\Contracts\Validation\Validator;
+use App\Traits\HasApiFailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\ValidationException;
 
 class UserUpdateRequest extends FormRequest
 {
-    use HasApiResponse;
+    use HasApiFailedValidation;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -37,22 +35,9 @@ class UserUpdateRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(
-            $this->errorResponse(
-                errors: [
-                    'message' => 'Validation errors occurred',
-                    'errors' => $validator->errors(),
-                ],
-                code: 422
-            )
-        );
-    }
-
     protected function prepareForValidation(): void
     {
-        if($this->has('password')) {
+        if ($this->has('password')) {
             $this->merge([
                 'password' => bcrypt($this->password)
             ]);
